@@ -51,7 +51,12 @@ export async function createInvoice(prevState: State, formData: FormData) {
     const amountInCents = amount * 100;
 
     try {
-        await fetch(`http://localhost:8091/invoices/save?customerId=${customerId}&amount=${amountInCents}&status=${status}`);
+        await fetch(`http://localhost:8091/invoices/save?customerId=${customerId}&amount=${amountInCents}&status=${status}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
     } catch (error) {
         return {
           message: 'Database Error: Failed to Create Invoice.',
@@ -80,7 +85,9 @@ export async function updateInvoice(id: string, prevState: State, formData: Form
     const amountInCents = amount * 100;
 
     try {
-        await fetch(`http://localhost:8091/invoices/update?id=${id}&customerId=${customerId}&amount=${amountInCents}&status=${status}`);
+        await fetch(`http://localhost:8091/invoices/update?id=${id}&customerId=${customerId}&amount=${amountInCents}&status=${status}`, {
+            method: 'PUT',
+        });
     } catch (error) {
         return {
           message: 'Database Error: Failed to Update Invoice.',
@@ -93,7 +100,9 @@ export async function updateInvoice(id: string, prevState: State, formData: Form
 
 export async function deleteInvoice(id: string) {
     try {
-        await fetch(`http://localhost:8091/invoices/delete?id=${id}`);
+        await fetch(`http://localhost:8091/invoices/delete?id=${id}`, {
+            method: 'DELETE',
+        });
         revalidatePath('/dashboard/invoices');
         return {
             message: 'Deleted Invoice',

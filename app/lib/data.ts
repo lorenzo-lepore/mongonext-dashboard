@@ -176,7 +176,7 @@ export async function fetchFilteredCustomers(query: string) {
   noStore();
 
   try {
-    const res = await fetch(`http://localhost:8091/customers/aggregate?query=${query}`);
+    const res = await fetch(`http://localhost:8091/customers/getFilteredAggregation?query=${query}`);
     const data = await res.json();
 
     const customers: FormattedCustomersTable[] = data.map((customer: any) => ({
