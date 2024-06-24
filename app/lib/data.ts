@@ -125,7 +125,7 @@ export async function fetchInvoicesPages(query: string) {
   noStore();
   
   try {
-    const res = await fetch(`http://localhost:8091/customers/numberOfPages?query=${query}`);
+    const res = await fetch(`http://localhost:8091/customers/numberOfRelatedInvoices?query=${query}`);
     const data = await res.json();
 
     const numberOfInvoices = parseInt(data);
